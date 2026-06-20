@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你的名字 | UI/UX Designer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text-main: #1d1d1f;
+            --text-sub: #6e6e73;
+            --accent: #0071e3; /* 经典科技蓝 */
+            --card-bg: #f5f5f7;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 10%;
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            margin-left: 2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 10% 10% 5% 10%;
+            max-width: 1200px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-sub);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--text-main);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* --- Portfolio Grid --- */
+        .portfolio {
+            padding: 5% 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            text-decoration: none;
+            color: inherit;
+            group: hover;
+        }
+
+        .image-container {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            font-style: italic;
+        }
+
+        .project-card:hover .image-container {
+            transform: scale(0.98);
+        }
+
+        .project-info h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .project-info p { color: var(--text-sub); font-size: 0.95rem; }
+
+        /* --- Footer --- */
+        footer {
+            padding: 5rem 10%;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .portfolio { grid-template-columns: 1fr; }
+            nav { padding: 1.5rem 5%; }
+            .hero { padding: 20% 5% 10% 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">DESIGNER.NAME</div>
+        <div class="nav-links">
+            <a href="#work">作品</a>
+            <a href="#about">关于</a>
+            <a href="mailto:hello@example.com">联系</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>你好，我是[姓名]<br>专注极简美学的UI设计师</h1>
+        <p>我通过研究用户行为和视觉美学，为初创公司和全球品牌打造具有商业影响力的数字产品。目前就职于某某科技公司。</p>
+        <a href="#work" class="cta-button">查看精选作品</a>
+    </section>
+
+    <section class="portfolio" id="work">
+        <a href="case-study.html" class="project-card">
+            <div class="image-container">
+                [ 项目预览图 1 - 建议 1600x1200px ]
+            </div>
+            <div class="project-info">
+                <h3>金融 App 重新设计</h3>
+                <p>移动端 / 用户研究 / 视觉系统</p>
+            </div>
+        </a>
+
+        <a href="#" class="project-card">
+            <div class="image-container">
+                [ 项目预览图 2 ]
+            </div>
+            <div class="project-info">
+                <h3>智能家居管理系统</h3>
+                <p>桌面端 / B2B 服务 / 交互原型</p>
+            </div>
+        </a>
+
+        <a href="#" class="project-card">
+            <div class="image-container">
+                [ 项目预览图 3 ]
+            </div>
+            <div class="project-info">
+                <h3>电商平台时尚版</h3>
+                <p>响应式 Web / 品牌升级 / 电商</p>
+            </div>
+        </a>
+    </section>
+
+    <footer>
+        <p>© 2026 [你的名字]. 基于 Framer & Code 制作</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; color: #999;">保持好奇，持续输出</p>
+    </footer>
+
+</body>
+</html>
