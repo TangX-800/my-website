@@ -1,0 +1,265 @@
+:root {
+    --black: #0a0a0a;
+    --paper: #eeeae0;
+    --red: #e53a2f;
+    --gray: #77746d;
+    --page-x: clamp(1.25rem, 7vw, 7rem);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-width: 320px;
+    background: var(--paper);
+    color: var(--black);
+    font-family: Arial, "Microsoft YaHei", "PingFang SC", sans-serif;
+    line-height: 1.7;
+}
+
+a {
+    color: inherit;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: 5px;
+}
+
+.detail-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.5rem var(--page-x);
+    border-bottom: 3px solid var(--black);
+    font-size: 0.8rem;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+}
+
+.detail-nav a {
+    text-decoration: none;
+}
+
+.module-switch {
+    display: flex;
+    justify-content: center;
+    gap: clamp(0.65rem, 2vw, 1.5rem);
+    margin-left: auto;
+    list-style: none;
+}
+
+.module-switch a {
+    display: block;
+    padding: 0.42rem 0.1rem;
+    border-bottom: 2px solid transparent;
+    color: var(--gray);
+    font-size: 0.82rem;
+    white-space: nowrap;
+}
+
+.module-switch a:hover,
+.module-switch a[aria-current="page"] {
+    border-color: var(--red);
+    color: var(--black);
+}
+
+.detail-header {
+    position: relative;
+    padding: clamp(5rem, 12vw, 9rem) var(--page-x) clamp(3rem, 7vw, 6rem);
+    overflow: hidden;
+}
+
+.chapter-label {
+    color: var(--red);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.24em;
+}
+
+.detail-header h1 {
+    margin-top: 0.5rem;
+    font-size: clamp(4rem, 13vw, 10rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.09em;
+}
+
+.detail-header h1.nowrap-title {
+    font-size: clamp(1.2rem, 5.8vw, 6rem);
+    letter-spacing: -0.06em;
+    white-space: nowrap;
+}
+
+.detail-header::after {
+    content: attr(data-mark);
+    position: absolute;
+    right: var(--page-x);
+    bottom: -0.2em;
+    color: rgba(10, 10, 10, 0.05);
+    font-size: clamp(10rem, 30vw, 25rem);
+    font-weight: 900;
+    line-height: 1;
+}
+
+.detail-list {
+    display: grid;
+    gap: 1.25rem;
+    padding: 0 var(--page-x) 7rem;
+}
+
+.single-detail {
+    min-height: 48vh;
+}
+
+.single-detail .detail-card {
+    min-height: 310px;
+}
+
+.detail-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(10rem, 0.35fr) 1fr;
+    gap: clamp(1.5rem, 5vw, 5rem);
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+    border: 4px solid var(--black);
+    background: #f8f5ed;
+    box-shadow: 0.65rem 0.65rem 0 var(--red);
+}
+
+.detail-card time,
+.detail-card .tag {
+    font-family: Georgia, serif;
+    font-size: 0.82rem;
+    font-style: italic;
+    font-weight: 700;
+}
+
+.detail-card h2 {
+    margin-bottom: 0.4rem;
+    font-size: clamp(1.6rem, 4vw, 3rem);
+    line-height: 1.1;
+}
+
+.detail-card h3 {
+    margin-bottom: 1rem;
+    color: var(--red);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+}
+
+.detail-card p + p {
+    margin-top: 0.8rem;
+}
+
+.skill-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+.skill-grid .detail-card {
+    display: block;
+}
+
+/* 技能页：桌面端一屏展示 */
+.skills-page {
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow: hidden;
+}
+
+.skills-page .detail-header {
+    padding-top: clamp(2rem, 5vh, 4rem);
+    padding-bottom: clamp(1.5rem, 4vh, 3rem);
+}
+
+.skills-page .detail-header h1 {
+    font-size: clamp(3.5rem, 9vh, 7rem);
+}
+
+.skills-page .skill-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    min-height: 0;
+    padding-bottom: clamp(1.5rem, 4vh, 3rem);
+}
+
+.skills-page .skill-grid .detail-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 0;
+}
+
+.skills-page .skill-grid .detail-card:nth-child(2) {
+    transform: translateY(clamp(0.5rem, 1.5vh, 1rem));
+}
+
+.skills-page .skill-grid .detail-card p {
+    max-width: 30rem;
+}
+
+.contact-box {
+    background: var(--black);
+    color: var(--paper);
+    box-shadow: 0.65rem 0.65rem 0 var(--red);
+}
+
+.contact-box a {
+    display: block;
+    width: fit-content;
+    margin-top: 0.55rem;
+    color: var(--red);
+    font-weight: 900;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 650px) {
+    .detail-nav {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .module-switch {
+        justify-content: flex-start;
+        width: 100%;
+        margin-left: 0;
+        overflow-x: auto;
+        padding-bottom: 0.3rem;
+    }
+
+    .module-switch a {
+        font-size: 0.76rem;
+    }
+
+    .detail-card,
+    .skill-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-page {
+        display: block;
+        overflow: visible;
+    }
+
+    .skills-page .skill-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-page .skill-grid .detail-card:nth-child(2) {
+        transform: none;
+    }
+
+    .detail-card {
+        gap: 0.8rem;
+        box-shadow: 0.4rem 0.4rem 0 var(--red);
+    }
+}

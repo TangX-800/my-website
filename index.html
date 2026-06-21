@@ -3,195 +3,1297 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>你的名字 | UI/UX Designer Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <meta name="description" content="Tang 的个人主页，关于校园、工作与生活中的其它故事。">
+    <title>Tang | Personal Homepage</title>
     <style>
         :root {
-            --bg: #ffffff;
-            --text-main: #1d1d1f;
-            --text-sub: #6e6e73;
-            --accent: #0071e3; /* 经典科技蓝 */
-            --card-bg: #f5f5f7;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --black: #0b0b0b;
+            --paper: #eeeae0;
+            --paper-dark: #d8d3c8;
+            --red: #e53a2f;
+            --gray: #8c8981;
+            --page-x: clamp(1.25rem, 5vw, 5.5rem);
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: auto;
+            scroll-snap-type: y mandatory;
+            background: var(--black);
+        }
+
+        html.is-page-scrolling {
+            scroll-snap-type: none;
+        }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main);
-            line-height: 1.6;
+            min-width: 320px;
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle, rgba(238, 234, 224, 0.08) 1px, transparent 1.3px) 0 0 / 9px 9px,
+                linear-gradient(115deg, transparent 0 62%, rgba(229, 58, 47, 0.045) 62% 63%, transparent 63% 100%),
+                var(--black);
+            background-attachment: fixed;
+            color: var(--paper);
+            font-family: Arial, "Microsoft YaHei", "PingFang SC", sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- Navigation --- */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem 10%;
-            position: sticky;
-            top: 0;
-            background: rgba(255,255,255,0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-        }
-
-        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px; }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-main);
-            margin-left: 2rem;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-        .nav-links a:hover { color: var(--accent); }
-
-        /* --- Hero Section --- */
-        .hero {
-            padding: 10% 10% 5% 10%;
-            max-width: 1200px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            line-height: 1.1;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            letter-spacing: -2px;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-sub);
-            max-width: 600px;
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: var(--text-main);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        /* --- Portfolio Grid --- */
-        .portfolio {
-            padding: 5% 10%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            text-decoration: none;
+        a {
             color: inherit;
-            group: hover;
         }
 
-        .image-container {
-            width: 100%;
-            aspect-ratio: 4/3;
-            background: var(--card-bg);
-            border-radius: 20px;
+        a:focus-visible {
+            outline: 3px solid var(--red);
+            outline-offset: 5px;
+        }
+
+        /* 固定导航 */
+        .site-nav {
+            position: fixed;
+            top: 50%;
+            left: clamp(0.55rem, 1.5vw, 1.4rem);
+            z-index: 30;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.7rem 0.4rem;
+            transform: translateY(-50%);
+        }
+
+        .nav-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            list-style: none;
+        }
+
+        .nav-list a {
+            display: grid;
+            place-items: center;
+            width: 2.3rem;
+            min-height: 2.3rem;
+            position: relative;
+            font-size: 0.74rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+        }
+
+        .nav-list a::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: -0.48rem;
+            width: 3px;
+            height: 1.4rem;
+            background: var(--red);
+            transform: translateY(-50%) scaleY(0);
+            transition: transform 300ms var(--ease-out);
+        }
+
+        .nav-list a:hover::after,
+        .nav-list a.is-active::after {
+            transform: translateY(-50%) scaleY(1);
+        }
+
+        /* 四个页面共用同一背景与版式 */
+        .page {
+            position: relative;
+            display: grid;
+            min-height: 100vh;
+            min-height: 100svh;
+            padding: 5rem var(--page-x) 2rem;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            isolation: isolate;
             overflow: hidden;
-            margin-bottom: 1rem;
-            transition: var(--transition);
+        }
+
+        .page::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: var(--page-x);
+            left: var(--page-x);
+            height: 1px;
+            background: rgba(238, 234, 224, 0.18);
+        }
+
+        .page:first-child::before {
+            display: none;
+        }
+
+        .page::after {
+            content: attr(data-page);
+            position: absolute;
+            right: var(--page-x);
+            bottom: 1rem;
+            color: var(--gray);
+            font-family: Georgia, serif;
+            font-size: 0.62rem;
+            letter-spacing: 0.2em;
+        }
+
+        .closing-note {
+            position: absolute;
+            bottom: 1.1rem;
+            left: clamp(4.2rem, 8vw, 7rem);
+            z-index: 5;
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: #ccc;
+            gap: 0.75rem;
+            color: rgba(238, 234, 224, 0.55);
+            font-family: Georgia, "Microsoft YaHei", serif;
+            font-size: 0.64rem;
             font-style: italic;
+            letter-spacing: 0.16em;
         }
 
-        .project-card:hover .image-container {
-            transform: scale(0.98);
+        .closing-note::before {
+            content: "";
+            width: 2.6rem;
+            height: 1px;
+            background: var(--red);
         }
 
-        .project-info h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-        .project-info p { color: var(--text-sub); font-size: 0.95rem; }
-
-        /* --- Footer --- */
-        footer {
-            padding: 5rem 10%;
-            border-top: 1px solid #eee;
-            text-align: center;
+        .page-shell {
+            display: grid;
+            grid-template-rows: auto minmax(0, 1fr);
+            gap: clamp(0.65rem, 1.5vh, 1rem);
+            width: min(1320px, 100%);
+            height: min(82vh, 800px);
+            margin: auto;
         }
 
-        /* --- Responsive --- */
-        @media (max-width: 768px) {
-            .portfolio { grid-template-columns: 1fr; }
-            nav { padding: 1.5rem 5%; }
-            .hero { padding: 20% 5% 10% 5%; }
+        .chapter-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            min-height: 2rem;
+            padding-right: 4rem;
+        }
+
+        .chapter-heading h2 {
+            color: var(--gray);
+            font-size: clamp(0.82rem, 1.4vw, 1.05rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: 0.13em;
+        }
+
+        .chapter-heading p {
+            color: var(--gray);
+            font-size: 0.56rem;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+        }
+
+        .chapter-number {
+            margin-right: 0.25em;
+            color: var(--red);
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: 1.2em;
+        }
+
+        /* 首页封面 */
+        .hero {
+            --pointer-x: 0;
+            --pointer-y: 0;
+            place-items: center;
+        }
+
+        .hero-ambient {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .ambient-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: min(68vw, 920px);
+            aspect-ratio: 1;
+            border: 1px solid rgba(238, 234, 224, 0.16);
+            border-radius: 50%;
+            box-shadow:
+                0 0 0 10vw rgba(238, 234, 224, 0.018),
+                0 0 0 22vw rgba(238, 234, 224, 0.012);
+            transform: translate(-50%, -50%);
+            animation: ring-breathe 8s var(--ease-out) infinite alternate;
+        }
+
+        .ambient-ring::before,
+        .ambient-ring::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background: rgba(238, 234, 224, 0.1);
+            transform: translate(-50%, -50%);
+        }
+
+        .ambient-ring::before {
+            width: 130vw;
+            height: 1px;
+        }
+
+        .ambient-ring::after {
+            width: 1px;
+            height: 130vh;
+        }
+
+        .hero-frame {
+            position: relative;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            width: min(86vw, 1320px);
+            height: min(76vh, 800px);
+            border: clamp(5px, 0.5vw, 8px) solid var(--paper);
+            background:
+                repeating-linear-gradient(112deg, transparent 0 35px, rgba(238, 234, 224, 0.055) 36px 38px, transparent 39px 72px),
+                rgba(11, 11, 11, 0.82);
+            box-shadow: 1rem 1rem 0 var(--red);
+            transform:
+                translate3d(calc(var(--pointer-x) * 20px), calc(var(--pointer-y) * 14px), 0)
+                perspective(1000px)
+                rotateX(calc(var(--pointer-y) * -3deg))
+                rotateY(calc(var(--pointer-x) * 3.8deg))
+                rotate(-0.5deg);
+            will-change: transform;
+        }
+
+        .hero-frame::before {
+            content: "主人公 / PROTAGONIST";
+            position: absolute;
+            top: clamp(1.25rem, 3vw, 2.5rem);
+            left: clamp(1.25rem, 3vw, 2.5rem);
+            color: var(--gray);
+            font-size: 0.62rem;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+        }
+
+        .hero-frame::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: -30%;
+            width: 18%;
+            background: linear-gradient(90deg, transparent, rgba(238, 234, 224, 0.13), transparent);
+            transform: skewX(-14deg);
+            animation: frame-scan 7s ease-in-out infinite 1.5s;
+            pointer-events: none;
+        }
+
+        .hero-name {
+            position: relative;
+            z-index: 2;
+            font-family: Impact, "Arial Black", sans-serif;
+            font-size: clamp(6rem, 22vw, 19rem);
+            font-weight: 900;
+            line-height: 0.75;
+            letter-spacing: -0.085em;
+            text-transform: uppercase;
+            text-shadow: 0.035em 0.035em 0 rgba(238, 234, 224, 0.12);
+            animation: name-breathe 6s ease-in-out infinite alternate;
+        }
+
+        .hero-name::before {
+            content: attr(data-text);
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(229, 58, 47, 0.7);
+            transform: translate(calc(var(--pointer-x) * -15px), calc(var(--pointer-y) * -10px));
+            transition: transform 500ms var(--ease-out);
+        }
+
+        .hero-name span {
+            color: var(--red);
+        }
+
+        .hero-subtitle {
+            position: absolute;
+            right: clamp(1rem, 3vw, 2.5rem);
+            bottom: clamp(1rem, 3vw, 2.5rem);
+            color: var(--gray);
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            writing-mode: vertical-rl;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 1rem;
+            left: var(--page-x);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--gray);
+            font-size: 0.62rem;
+            letter-spacing: 0.18em;
+        }
+
+        .scroll-hint::before {
+            content: "";
+            width: 3rem;
+            height: 1px;
+            background: var(--red);
+            transform-origin: left center;
+            animation: scroll-line 2.4s var(--ease-out) infinite;
+        }
+
+        @keyframes ring-breathe {
+            from { opacity: 0.45; transform: translate(-50%, -50%) scale(0.92) rotate(0deg); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1.06) rotate(4deg); }
+        }
+
+        @keyframes frame-scan {
+            0%, 28% { left: -30%; opacity: 0; }
+            38% { opacity: 1; }
+            62% { opacity: 0.8; }
+            72%, 100% { left: 115%; opacity: 0; }
+        }
+
+        @keyframes name-breathe {
+            from { letter-spacing: -0.085em; }
+            to { letter-spacing: -0.07em; }
+        }
+
+        @keyframes scroll-line {
+            0% { opacity: 0.35; transform: scaleX(0.25); }
+            55% { opacity: 1; transform: scaleX(1); }
+            100% { opacity: 0; transform: scaleX(1); }
+        }
+
+        /* 漫画分镜通用样式 */
+        .panel-layout {
+            position: relative;
+            display: grid;
+            min-height: 0;
+            gap: clamp(0.65rem, 1.3vw, 1.2rem);
+        }
+
+        .manga-panel {
+            position: relative;
+            display: flex;
+            min-width: 0;
+            min-height: 0;
+            overflow: hidden;
+            border: 5px solid var(--paper);
+            background: var(--paper);
+            color: var(--black);
+            text-decoration: none;
+            transition: transform 550ms var(--ease-out), filter 550ms var(--ease-out);
+        }
+
+        .manga-panel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background:
+                radial-gradient(circle at 72% 32%, rgba(11, 11, 11, 0.18) 1px, transparent 1.5px) 0 0 / 7px 7px,
+                repeating-linear-gradient(120deg, transparent 0 30px, rgba(11, 11, 11, 0.06) 31px 33px, transparent 34px 62px);
+            transition: transform 700ms var(--ease-out);
+        }
+
+        .manga-panel:hover {
+            z-index: 5;
+            filter: drop-shadow(0.7rem 0.7rem 0 var(--red));
+            transform: translate(-0.35rem, -0.35rem);
+        }
+
+        .manga-panel:hover::before {
+            transform: scale(1.06);
+        }
+
+        .panel-image {
+            position: absolute;
+            inset: -2px;
+            z-index: 0;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            object-fit: cover;
+            object-position: center 46%;
+            filter: saturate(0.88) contrast(1.04);
+            transition: transform 700ms var(--ease-out), filter 700ms var(--ease-out);
+        }
+
+        .manga-panel:hover .panel-image {
+            filter: saturate(1) contrast(1.06);
+            transform: scale(1.035);
+        }
+
+        /* 带图分镜：减少大面积泛白，让画面与文字区更有层次 */
+        .manga-panel.has-image {
+            border: 0;
+            background: var(--black);
+        }
+
+        .manga-panel.has-image::before {
+            display: none;
+        }
+
+        .manga-panel.has-image .panel-image {
+            filter: saturate(0.8) contrast(1.08) brightness(0.94);
+        }
+
+        .manga-panel.has-image .panel-copy {
+            color: var(--paper);
+            background: linear-gradient(
+                to top,
+                rgba(11, 11, 11, 0.78) 0,
+                rgba(11, 11, 11, 0.58) 13%,
+                rgba(11, 11, 11, 0.16) 29%,
+                transparent 42%
+            );
+        }
+
+        .manga-panel.has-image .panel-copy h3,
+        .manga-panel.has-image .panel-copy p {
+            color: var(--paper);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+        }
+
+        .manga-panel.has-image:hover .panel-image {
+            filter: saturate(0.96) contrast(1.1) brightness(0.98);
+        }
+
+        .netease-image {
+            z-index: 0;
+            object-fit: cover;
+            object-position: right 46%;
+        }
+
+        .manga-panel:hover .netease-image {
+            transform: none;
+        }
+
+        .panel-copy {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            width: 100%;
+            padding: clamp(1rem, 2.5vw, 2.4rem);
+            background: linear-gradient(to top, rgba(238, 234, 224, 0.98) 0 33%, transparent 72%);
+        }
+
+        .panel-kicker {
+            margin-bottom: 0.4rem;
+            color: var(--red);
+            font-family: Georgia, serif;
+            font-size: clamp(0.58rem, 0.9vw, 0.72rem);
+            font-style: italic;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+        }
+
+        .panel-copy h3 {
+            max-width: 90%;
+            font-size: clamp(1.35rem, 3vw, 3rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.05em;
+        }
+
+        .panel-copy h3.no-wrap {
+            max-width: 100%;
+            font-size: clamp(1rem, 2.35vw, 2.5rem);
+            white-space: nowrap;
+        }
+
+        .panel-copy p {
+            margin-top: 0.45rem;
+            font-size: clamp(0.66rem, 1vw, 0.82rem);
+            font-weight: 800;
+        }
+
+        .panel-arrow {
+            position: absolute;
+            top: clamp(1rem, 2vw, 1.5rem);
+            right: clamp(1rem, 2vw, 1.5rem);
+            z-index: 3;
+            display: grid;
+            place-items: center;
+            width: 2.4rem;
+            height: 2.4rem;
+            border: 3px solid var(--black);
+            border-radius: 50%;
+            background: var(--red);
+            font-size: 1.2rem;
+            font-weight: 900;
+        }
+
+        .panel-lock {
+            position: absolute;
+            top: clamp(1rem, 2vw, 1.5rem);
+            left: clamp(1rem, 2vw, 1.5rem);
+            z-index: 3;
+            display: grid;
+            place-items: center;
+            width: 2.6rem;
+            height: 2.6rem;
+            color: var(--black);
+            filter: drop-shadow(2px 2px 0 var(--red));
+            pointer-events: none;
+        }
+
+        .lock-shape {
+            position: relative;
+            display: block;
+            width: 1.25rem;
+            height: 1rem;
+            border: 3px solid currentColor;
+            background: var(--paper);
+        }
+
+        .lock-shape::before {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            width: 0.7rem;
+            height: 0.62rem;
+            border: 3px solid currentColor;
+            border-bottom: 0;
+            border-radius: 0.55rem 0.55rem 0 0;
+            transform: translateX(-50%);
+        }
+
+        .lock-shape::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0.24rem;
+            height: 0.42rem;
+            border-radius: 50% 50% 0 0;
+            background: var(--red);
+            transform: translate(-50%, -45%);
+        }
+
+        /* 斜切边分镜需要把按钮收进完整可见的安全区 */
+        .two-panels .manga-panel:first-child .panel-arrow {
+            right: 21%;
+        }
+
+        .four-panels .manga-panel:nth-child(3) .panel-arrow {
+            top: clamp(1.6rem, 3vw, 2.4rem);
+            right: 7%;
+        }
+
+        /* 两格：按照参考图形成倾斜中缝 */
+        .two-panels {
+            grid-template-columns: 0.9fr 1.2fr;
+        }
+
+        .two-panels .manga-panel:first-child {
+            clip-path: polygon(0 0, 82% 0, 100% 100%, 0 100%);
+            margin-right: -8%;
+        }
+
+        .two-panels .manga-panel:last-child {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 18% 100%);
+            margin-left: -4%;
+        }
+
+        .two-panels .manga-panel:first-child .panel-copy {
+            padding-right: 22%;
+        }
+
+        .two-panels .manga-panel:last-child .panel-copy {
+            padding-left: 20%;
+        }
+
+        /* 四格：不规则漫画页分镜 */
+        .four-panels {
+            grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+            gap: clamp(0.7rem, 1.2vw, 1.05rem);
+        }
+
+        #experience .page-shell {
+            transform: translateY(-1.5vh);
+        }
+
+        .four-panels .manga-panel:nth-child(1) {
+            grid-column: 1;
+            grid-row: 1;
+            clip-path: polygon(0 0, 100% 0, 96% 100%, 0 92%);
+        }
+
+        .four-panels .manga-panel:nth-child(2) {
+            grid-column: 2;
+            grid-row: 1;
+            clip-path: polygon(4% 0, 100% 0, 100% 96%, 0 100%);
+        }
+
+        .four-panels .manga-panel:nth-child(3) {
+            grid-column: 1;
+            grid-row: 2;
+            clip-path: polygon(0 0, 96% 6%, 100% 100%, 0 100%);
+        }
+
+        .four-panels .manga-panel:nth-child(4) {
+            grid-column: 2;
+            grid-row: 2;
+            clip-path: polygon(0 5%, 100% 0, 100% 100%, 5% 100%);
+        }
+
+        .four-panels .panel-copy {
+            padding: clamp(0.8rem, 1.6vw, 1.5rem);
+        }
+
+        .four-panels .panel-copy h3 {
+            font-size: clamp(1.1rem, 2.1vw, 2rem);
+        }
+
+        /* 为斜切边缘预留独立的文字安全区 */
+        .four-panels .manga-panel:nth-child(1) .panel-copy {
+            padding-bottom: clamp(1.5rem, 2.8vw, 2.5rem);
+        }
+
+        .four-panels .manga-panel:nth-child(4) .panel-copy {
+            padding-left: clamp(1.8rem, 3.5vw, 3.5rem);
+        }
+
+        /* 第四页：左侧上下两格，中间与右侧各一格 */
+        .other-panels {
+            grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.05fr) minmax(0, 1fr);
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+        }
+
+        .other-panels .manga-panel:nth-child(1) {
+            grid-column: 1;
+            grid-row: 1;
+            clip-path: polygon(0 0, 100% 0, 94% 100%, 0 96%);
+        }
+
+        .other-panels .manga-panel:nth-child(2) {
+            grid-column: 1;
+            grid-row: 2;
+            clip-path: polygon(0 0, 94% 4%, 100% 100%, 0 100%);
+        }
+
+        .other-panels .manga-panel:nth-child(3) {
+            grid-column: 2;
+            grid-row: 1 / 3;
+            clip-path: polygon(5% 0, 100% 2%, 96% 100%, 5% 100%, 0 50%);
+        }
+
+        .other-panels .manga-panel:nth-child(4) {
+            grid-column: 3;
+            grid-row: 1 / 3;
+            clip-path: polygon(4% 2%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .other-panels .manga-panel:nth-child(-n + 2) .panel-copy h3 {
+            font-size: clamp(1.05rem, 2vw, 1.8rem);
+        }
+
+        /* 个人项目访问验证 */
+        .project-gate[hidden] {
+            display: none;
+        }
+
+        .project-gate {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: grid;
+            place-items: center;
+            padding: 1.25rem;
+            background: rgba(11, 11, 11, 0.82);
+            backdrop-filter: blur(10px);
+        }
+
+        .gate-panel {
+            position: relative;
+            width: min(92vw, 470px);
+            padding: clamp(1.5rem, 5vw, 3rem);
+            border: 5px solid var(--paper);
+            background: var(--black);
+            box-shadow: 0.75rem 0.75rem 0 var(--red);
+        }
+
+        .gate-kicker {
+            margin-bottom: 0.65rem;
+            color: var(--red);
+            font-family: Georgia, serif;
+            font-size: 0.68rem;
+            font-style: italic;
+            font-weight: 900;
+            letter-spacing: 0.15em;
+        }
+
+        .gate-panel h2 {
+            margin-bottom: 0.5rem;
+            font-size: clamp(1.8rem, 6vw, 3rem);
+            line-height: 1;
+        }
+
+        .gate-copy {
+            margin-bottom: 1.4rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        .gate-form {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0.65rem;
+        }
+
+        .gate-input {
+            min-width: 0;
+            padding: 0.85rem 1rem;
+            border: 3px solid var(--paper);
+            border-radius: 0;
+            background: transparent;
+            color: var(--paper);
+            font: inherit;
+            font-size: 1.1rem;
+            font-weight: 900;
+            letter-spacing: 0.35em;
+            outline: none;
+        }
+
+        .gate-input:focus {
+            border-color: var(--red);
+        }
+
+        .gate-submit,
+        .gate-close {
+            border: 0;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 900;
+        }
+
+        .gate-submit {
+            padding: 0 1.1rem;
+            background: var(--red);
+            color: var(--black);
+        }
+
+        .gate-close {
+            position: absolute;
+            top: 0.8rem;
+            right: 0.8rem;
+            width: 2rem;
+            height: 2rem;
+            background: transparent;
+            color: var(--paper);
+            font-size: 1.25rem;
+        }
+
+        .gate-error {
+            min-height: 1.2rem;
+            margin-top: 0.75rem;
+            color: var(--red);
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+
+        /* 入场动画 */
+        .hero-frame,
+        .manga-panel {
+            opacity: 0;
+            transform: translateY(2.5rem);
+        }
+
+        .page.is-visible .hero-frame,
+        .page.is-visible .manga-panel {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 800ms var(--ease-out), transform 950ms var(--ease-out), filter 550ms var(--ease-out);
+        }
+
+        .page.is-visible .manga-panel:nth-child(2) { transition-delay: 80ms; }
+        .page.is-visible .manga-panel:nth-child(3) { transition-delay: 140ms; }
+        .page.is-visible .manga-panel:nth-child(4) { transition-delay: 200ms; }
+
+        .page.is-visible .manga-panel:hover {
+            transform: translate(-0.35rem, -0.35rem);
+        }
+
+        .page.is-visible .hero-frame {
+            transform:
+                translate3d(calc(var(--pointer-x) * 20px), calc(var(--pointer-y) * 14px), 0)
+                perspective(1000px)
+                rotateX(calc(var(--pointer-y) * -3deg))
+                rotateY(calc(var(--pointer-x) * 3.8deg))
+                rotate(-0.5deg);
+        }
+
+        /* 手机布局 */
+        @media (max-width: 700px) {
+            .site-nav {
+                left: 0.25rem;
+                padding: 0.65rem 0.35rem;
+            }
+
+            .nav-list {
+                gap: 0.45rem;
+            }
+
+            .nav-list a {
+                width: 2rem;
+                min-height: 2rem;
+                font-size: 0.64rem;
+            }
+
+            .page {
+                padding-top: 4.2rem;
+            }
+
+            .page-shell {
+                height: 84vh;
+            }
+
+            .chapter-heading p {
+                display: none;
+            }
+
+            .chapter-heading {
+                padding-right: 2.5rem;
+            }
+
+            .hero-frame {
+                width: 88vw;
+                height: 74vh;
+                box-shadow: 0.6rem 0.6rem 0 var(--red);
+            }
+
+            .two-panels {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(2, 1fr);
+            }
+
+            .two-panels .manga-panel:first-child,
+            .two-panels .manga-panel:last-child {
+                margin: 0;
+            }
+
+            .two-panels .manga-panel:first-child {
+                clip-path: polygon(0 0, 100% 0, 94% 100%, 0 88%);
+            }
+
+            .two-panels .manga-panel:last-child {
+                clip-path: polygon(0 10%, 94% 0, 100% 100%, 0 100%);
+            }
+
+            .two-panels .manga-panel:first-child .panel-copy,
+            .two-panels .manga-panel:last-child .panel-copy {
+                padding: 1rem;
+            }
+
+            .four-panels {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+
+            #experience .page-shell {
+                transform: none;
+            }
+
+            .four-panels .manga-panel:nth-child(n) {
+                grid-column: auto;
+                grid-row: auto;
+                clip-path: none;
+            }
+
+            .panel-copy {
+                padding: 0.8rem;
+            }
+
+            .panel-copy h3,
+            .four-panels .panel-copy h3 {
+                font-size: clamp(1rem, 5vw, 1.45rem);
+            }
+
+            .four-panels .manga-panel:nth-child(1) .panel-copy,
+            .four-panels .manga-panel:nth-child(4) .panel-copy {
+                padding: 0.8rem;
+            }
+
+            .other-panels {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+
+            .other-panels .manga-panel:nth-child(n) {
+                grid-column: auto;
+                grid-row: auto;
+                clip-path: none;
+            }
+
+            .other-panels .manga-panel:nth-child(-n + 2) .panel-copy h3 {
+                font-size: clamp(1rem, 5vw, 1.4rem);
+            }
+
+            .panel-copy p {
+                display: none;
+            }
+
+            .panel-arrow {
+                top: 0.6rem;
+                right: 0.6rem;
+                width: 1.9rem;
+                height: 1.9rem;
+                font-size: 0.9rem;
+            }
+
+            .panel-lock {
+                top: 0.75rem;
+                left: 0.75rem;
+                width: 2.1rem;
+                height: 2.1rem;
+            }
+
+            .gate-form {
+                grid-template-columns: 1fr;
+            }
+
+            .gate-submit {
+                min-height: 2.8rem;
+            }
+
+            .two-panels .manga-panel:first-child .panel-arrow,
+            .four-panels .manga-panel:nth-child(3) .panel-arrow {
+                right: 0.75rem;
+            }
+
+            .four-panels .manga-panel:nth-child(3) .panel-arrow {
+                top: 0.9rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation: none !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 <body>
-
-    <nav>
-        <div class="logo">DESIGNER.NAME</div>
-        <div class="nav-links">
-            <a href="#work">作品</a>
-            <a href="#about">关于</a>
-            <a href="mailto:hello@example.com">联系</a>
-        </div>
+    <nav class="site-nav" aria-label="主导航">
+        <ul class="nav-list">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#education">校园</a></li>
+            <li><a href="#experience">工作</a></li>
+            <li><a href="#other">其它</a></li>
+        </ul>
     </nav>
 
-    <section class="hero">
-        <h1>你好，我是[小唐]<br>专注极简美学的UI设计师</h1>
-        <p>我通过研究用户行为和视觉美学，为初创公司和全球品牌打造具有商业影响力的数字产品。目前就职于某某科技公司。</p>
-        <a href="#work" class="cta-button">查看精选作品</a>
-    </section>
+    <main>
+        <!-- 首页 -->
+        <section class="page hero is-visible" id="home" data-page="00 / 03">
+            <div class="hero-ambient" aria-hidden="true">
+                <span class="ambient-ring"></span>
+            </div>
+            <div class="hero-frame">
+                <h1 class="hero-name" data-text="Tang">Tan<span>g</span></h1>
+                <p class="hero-subtitle">DESIGN · GAME · PRODUCT</p>
+            </div>
+            <p class="scroll-hint">SCROLL TO BEGIN</p>
+        </section>
 
-    <section class="portfolio" id="work">
-        <a href="case-study.html" class="project-card">
-            <div class="image-container">
-                [ 项目预览图 1 - 建议 1600x1200px ]
+        <!-- 校园经历：两个分镜模块 -->
+        <section class="page" id="education" data-page="01 / 03">
+            <div class="page-shell">
+                <header class="chapter-heading">
+                    <h2><span class="chapter-number">01.</span>校园经历</h2>
+                    <p>CAMPUS CHRONICLE</p>
+                </header>
+                <div class="panel-layout two-panels">
+                    <a class="manga-panel" href="education-pku.html">
+                        <span class="panel-arrow">↗</span>
+                        <div class="panel-copy"><span class="panel-kicker">2020 — 2023</span><h3>北京大学</h3><p>计算机技术 · 硕士</p></div>
+                    </a>
+                    <a class="manga-panel" href="education-upc.html">
+                        <span class="panel-arrow">↗</span>
+                        <div class="panel-copy"><span class="panel-kicker">2016 — 2020</span><h3 class="no-wrap">中国石油大学（华东）</h3><p>工业设计 · 本科</p></div>
+                    </a>
+                </div>
             </div>
-            <div class="project-info">
-                <h3>金融 App 重新设计</h3>
-                <p>移动端 / 用户研究 / 视觉系统</p>
-            </div>
-        </a>
+        </section>
 
-        <a href="#" class="project-card">
-            <div class="image-container">
-                [ 项目预览图 2 ]
+        <!-- 工作经历：四个不规则分镜模块 -->
+        <section class="page" id="experience" data-page="02 / 03">
+            <div class="page-shell">
+                <header class="chapter-heading">
+                    <h2><span class="chapter-number">02.</span>工作经历</h2>
+                    <p>CAREER CHRONICLE</p>
+                </header>
+                <div class="panel-layout four-panels">
+                    <a class="manga-panel" href="work-iflytek.html">
+                        <span class="panel-arrow">↗</span>
+                        <div class="panel-copy"><span class="panel-kicker">2025 — NOW</span><h3>科大讯飞</h3><p>AI 应用产品经理</p></div>
+                    </a>
+                    <a class="manga-panel" href="work-sungrow.html">
+                        <span class="panel-arrow">↗</span>
+                        <div class="panel-copy"><span class="panel-kicker">2024 — 2025</span><h3>阳光新能源</h3><p>产品经理</p></div>
+                    </a>
+                    <a class="manga-panel has-image" href="work-funplus.html">
+                        <img class="panel-image" src="伊莫.jpg" alt="《伊莫》海岛场景与水中的白色角色" loading="lazy" decoding="async">
+                        <span class="panel-arrow">↗</span>
+                        <div class="panel-copy"><span class="panel-kicker">2023 — 2024</span><h3>FunPlus</h3><p>关卡策划</p></div>
+                    </a>
+                    <a class="manga-panel has-image" href="work-netease.html">
+                        <img class="panel-image netease-image" src="蛋仔派对.jpg" alt="《蛋仔派对》游戏角色与雪山场景" loading="lazy" decoding="async">
+                        <span class="panel-arrow">↗</span>
+                        <div class="panel-copy"><span class="panel-kicker">2021 — 2022</span><h3>网易</h3><p>关卡策划</p></div>
+                    </a>
+                </div>
             </div>
-            <div class="project-info">
-                <h3>智能家居管理系统</h3>
-                <p>桌面端 / B2B 服务 / 交互原型</p>
-            </div>
-        </a>
+        </section>
 
-        <a href="#" class="project-card">
-            <div class="image-container">
-                [ 项目预览图 3 ]
+        <!-- 其它：两个分镜模块 -->
+        <section class="page" id="other" data-page="03 / 03">
+            <div class="page-shell">
+                <header class="chapter-heading">
+                    <h2><span class="chapter-number">03.</span>其它</h2>
+                    <p>SIDE STORIES</p>
+                </header>
+                <div class="panel-layout other-panels">
+                    <a class="manga-panel" href="project-1.html" data-protected-project data-access-key="project-access">
+                        <span class="panel-lock" aria-hidden="true"><span class="lock-shape"></span></span>
+                        <span class="panel-arrow">↗</span>
+                        <div class="panel-copy"><span class="panel-kicker">PERSONAL PROJECT</span><h3>个人项目 1</h3><p>项目内容待补充</p></div>
+                    </a>
+                    <a class="manga-panel" href="project-2.html" data-protected-project data-access-key="project-access">
+                        <span class="panel-lock" aria-hidden="true"><span class="lock-shape"></span></span>
+                        <span class="panel-arrow">↗</span>
+                        <div class="panel-copy"><span class="panel-kicker">PERSONAL PROJECT</span><h3>个人项目 2</h3><p>项目内容待补充</p></div>
+                    </a>
+                    <a class="manga-panel" href="skills.html">
+                        <span class="panel-arrow">↗</span>
+                        <div class="panel-copy"><span class="panel-kicker">TOOLS & ABILITIES</span><h3>技能</h3><p>设计、三维、视频与效率工具</p></div>
+                    </a>
+                    <a class="manga-panel" href="contact.html">
+                        <span class="panel-arrow">↗</span>
+                        <div class="panel-copy"><span class="panel-kicker">KEEP IN TOUCH</span><h3>联系我</h3><p>下一话，一起创造</p></div>
+                    </a>
+                </div>
             </div>
-            <div class="project-info">
-                <h3>电商平台时尚版</h3>
-                <p>响应式 Web / 品牌升级 / 电商</p>
-            </div>
-        </a>
-    </section>
+            <p class="closing-note">保持好奇 · 持续输出</p>
+        </section>
+    </main>
 
-    <footer>
-        <p>© 2026 [你的名字]. 基于 Framer & Code 制作</p>
-        <p style="margin-top: 1rem; font-size: 0.8rem; color: #999;">保持好奇，持续输出</p>
-    </footer>
+    <div class="project-gate" id="project-gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" hidden>
+        <div class="gate-panel">
+            <button class="gate-close" type="button" aria-label="关闭验证">×</button>
+            <p class="gate-kicker">CONFIDENTIAL CHAPTER</p>
+            <h2 id="gate-title">请输入访问秘钥</h2>
+            <p class="gate-copy">输入 6 位数字后进入个人项目详情。</p>
+            <form class="gate-form">
+                <input class="gate-input" type="password" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="off" aria-label="6 位数字秘钥" required>
+                <button class="gate-submit" type="submit">解锁</button>
+            </form>
+            <p class="gate-error" role="alert" aria-live="polite"></p>
+        </div>
+    </div>
 
+    <script>
+        // 鼠标滚轮使用统一的逐帧缓动；触摸设备继续使用原生吸附。
+        const pages = [...document.querySelectorAll(".page")];
+        const navLinks = [...document.querySelectorAll('.nav-list a[href^="#"]')];
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let currentPage = 0;
+        let scrollFrame = 0;
+        let isAnimating = false;
+        let wheelDistance = 0;
+        let wheelResetTimer = 0;
+        let wheelCooldownUntil = 0;
+
+        // 两个个人项目共用验证层，并在当前标签页记录授权状态。
+        const projectGate = document.querySelector("#project-gate");
+        const gateForm = projectGate.querySelector(".gate-form");
+        const gateInput = projectGate.querySelector(".gate-input");
+        const gateError = projectGate.querySelector(".gate-error");
+        const gateClose = projectGate.querySelector(".gate-close");
+        let pendingProjectUrl = "";
+        let pendingAccessKey = "";
+
+        function closeProjectGate() {
+            projectGate.hidden = true;
+            gateInput.value = "";
+            gateError.textContent = "";
+            pendingProjectUrl = "";
+            pendingAccessKey = "";
+        }
+
+        document.querySelectorAll("[data-protected-project]").forEach((card) => {
+            card.addEventListener("click", (event) => {
+                const accessKey = card.dataset.accessKey;
+                if (sessionStorage.getItem(accessKey) === "granted") return;
+
+                event.preventDefault();
+                pendingProjectUrl = card.href;
+                pendingAccessKey = accessKey;
+                projectGate.hidden = false;
+                window.setTimeout(() => gateInput.focus(), 0);
+            });
+        });
+
+        gateForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            if (gateInput.value !== "225454") {
+                gateError.textContent = "秘钥不正确，请重新输入。";
+                gateInput.select();
+                return;
+            }
+
+            sessionStorage.setItem(pendingAccessKey, "granted");
+            window.location.href = pendingProjectUrl;
+        });
+
+        gateClose.addEventListener("click", closeProjectGate);
+        projectGate.addEventListener("click", (event) => {
+            if (event.target === projectGate) closeProjectGate();
+        });
+
+        window.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && !projectGate.hidden) closeProjectGate();
+        });
+
+        function easeOutQuint(value) {
+            return 1 - Math.pow(1 - value, 5);
+        }
+
+        function getNearestPage() {
+            return pages.reduce((nearest, page, index) => {
+                const nearestDistance = Math.abs(pages[nearest].offsetTop - window.scrollY);
+                const pageDistance = Math.abs(page.offsetTop - window.scrollY);
+                return pageDistance < nearestDistance ? index : nearest;
+            }, 0);
+        }
+
+        function goToPage(index) {
+            const nextPage = Math.max(0, Math.min(index, pages.length - 1));
+            currentPage = nextPage;
+            const startY = window.scrollY;
+            const targetY = pages[currentPage].offsetTop;
+            const distance = targetY - startY;
+
+            cancelAnimationFrame(scrollFrame);
+            if (reduceMotion.matches || Math.abs(distance) < 2) {
+                window.scrollTo(0, targetY);
+                return;
+            }
+
+            const startedAt = performance.now();
+            const duration = Math.min(1050, Math.max(720, Math.abs(distance) * 0.72));
+            isAnimating = true;
+            document.documentElement.classList.add("is-page-scrolling");
+
+            function animateScroll(now) {
+                const progress = Math.min((now - startedAt) / duration, 1);
+                window.scrollTo(0, startY + distance * easeOutQuint(progress));
+
+                if (progress < 1) {
+                    scrollFrame = requestAnimationFrame(animateScroll);
+                    return;
+                }
+
+                isAnimating = false;
+                wheelDistance = 0;
+                wheelCooldownUntil = performance.now() + 320;
+                document.documentElement.classList.remove("is-page-scrolling");
+                history.replaceState(null, "", `#${pages[currentPage].id}`);
+            }
+
+            scrollFrame = requestAnimationFrame(animateScroll);
+        }
+
+        window.addEventListener("wheel", (event) => {
+            if (reduceMotion.matches || event.ctrlKey) return;
+            event.preventDefault();
+            if (isAnimating || performance.now() < wheelCooldownUntil) return;
+
+            const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1);
+            wheelDistance += delta;
+            clearTimeout(wheelResetTimer);
+            wheelResetTimer = window.setTimeout(() => { wheelDistance = 0; }, 140);
+
+            if (Math.abs(wheelDistance) < 45) return;
+            const direction = wheelDistance > 0 ? 1 : -1;
+            wheelDistance = 0;
+            goToPage(getNearestPage() + direction);
+        }, { passive: false });
+
+        window.addEventListener("keydown", (event) => {
+            if (isAnimating) return;
+            if (["ArrowDown", "PageDown"].includes(event.key)) { event.preventDefault(); goToPage(getNearestPage() + 1); }
+            if (["ArrowUp", "PageUp"].includes(event.key)) { event.preventDefault(); goToPage(getNearestPage() - 1); }
+        });
+
+        navLinks.forEach((link, index) => {
+            link.addEventListener("click", (event) => {
+                event.preventDefault();
+                if (!isAnimating) goToPage(index);
+            });
+        });
+
+        // 首页根据指针位置产生轻微视差，离开时平滑回正。
+        const hero = document.querySelector(".hero");
+        let pointerFrame = 0;
+
+        hero.addEventListener("pointermove", (event) => {
+            if (reduceMotion.matches || event.pointerType === "touch") return;
+            cancelAnimationFrame(pointerFrame);
+            pointerFrame = requestAnimationFrame(() => {
+                const rect = hero.getBoundingClientRect();
+                hero.style.setProperty("--pointer-x", ((event.clientX - rect.left) / rect.width - 0.5).toFixed(3));
+                hero.style.setProperty("--pointer-y", ((event.clientY - rect.top) / rect.height - 0.5).toFixed(3));
+            });
+        });
+
+        hero.addEventListener("pointerleave", () => {
+            hero.style.setProperty("--pointer-x", 0);
+            hero.style.setProperty("--pointer-y", 0);
+        });
+
+        const pageObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                currentPage = pages.indexOf(entry.target);
+                entry.target.classList.add("is-visible");
+                navLinks.forEach((link) => link.classList.toggle("is-active", link.hash === `#${entry.target.id}`));
+            });
+        }, { threshold: 0.6 });
+
+        pages.forEach((page) => pageObserver.observe(page));
+    </script>
 </body>
 </html>
