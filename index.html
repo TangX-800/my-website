@@ -295,7 +295,7 @@
             width: 18%;
             background: linear-gradient(90deg, transparent, rgba(238, 234, 224, 0.13), transparent);
             transform: skewX(-14deg);
-            animation: frame-scan 7s ease-in-out infinite 1.5s;
+            animation: frame-scan 6s ease-in-out infinite 1.5s;
             pointer-events: none;
         }
 
@@ -365,10 +365,10 @@
         }
 
         @keyframes frame-scan {
-            0%, 28% { left: -30%; opacity: 0; }
-            38% { opacity: 1; }
-            62% { opacity: 0.8; }
-            72%, 100% { left: 115%; opacity: 0; }
+            0%, 32% { left: -30%; opacity: 0; }
+            36% { opacity: 1; }
+            54% { opacity: 0.8; }
+            58%, 100% { left: 115%; opacity: 0; }
         }
 
         @keyframes name-breathe {
@@ -484,6 +484,35 @@
 
         .manga-panel:hover .netease-image {
             transform: none;
+        }
+
+        .campus-pku-image {
+            object-fit: cover;
+            object-position: center 44%;
+        }
+
+        .manga-panel:hover .campus-pku-image {
+            transform: none;
+        }
+
+        .campus-upc-image {
+            object-fit: cover;
+            object-position: center 48%;
+        }
+
+        .manga-panel:hover .campus-upc-image {
+            transform: none;
+        }
+
+        .sungrow-image {
+            top: -38px;
+            height: calc(100% + 40px);
+            object-position: center 34%;
+            transform: translateY(36px);
+        }
+
+        .manga-panel:hover .sungrow-image {
+            transform: translateY(36px) scale(1.035);
         }
 
         .panel-copy {
@@ -1036,11 +1065,13 @@
                     <p>CAMPUS CHRONICLE</p>
                 </header>
                 <div class="panel-layout two-panels">
-                    <a class="manga-panel" href="education-pku.html">
+                    <a class="manga-panel has-image" href="education-pku.html">
+                        <img class="panel-image campus-pku-image" src="campus-pku.jpeg" alt="北京大学未名湖畔的博雅塔" loading="lazy" decoding="async">
                         <span class="panel-arrow">↗</span>
                         <div class="panel-copy"><span class="panel-kicker">2020 — 2023</span><h3>北京大学</h3><p>计算机技术 · 硕士</p></div>
                     </a>
-                    <a class="manga-panel" href="education-upc.html">
+                    <a class="manga-panel has-image" href="education-upc.html">
+                        <img class="panel-image campus-upc-image" src="campus-upc.png" alt="中国石油大学（华东）青岛校区秋景、道路与主楼" loading="lazy" decoding="async">
                         <span class="panel-arrow">↗</span>
                         <div class="panel-copy"><span class="panel-kicker">2016 — 2020</span><h3 class="no-wrap">中国石油大学（华东）</h3><p>工业设计 · 本科</p></div>
                     </a>
@@ -1060,7 +1091,8 @@
                         <span class="panel-arrow">↗</span>
                         <div class="panel-copy"><span class="panel-kicker">2025 — NOW</span><h3>科大讯飞</h3><p>AI 应用产品经理</p></div>
                     </a>
-                    <a class="manga-panel" href="work-sungrow.html">
+                    <a class="manga-panel has-image" href="work-sungrow.html">
+                        <img class="panel-image sungrow-image" src="阳光家庭能源.png" alt="阳光家庭能源应用中的光伏住宅屋顶" loading="lazy" decoding="async">
                         <span class="panel-arrow">↗</span>
                         <div class="panel-copy"><span class="panel-kicker">2024 — 2025</span><h3>阳光新能源</h3><p>产品经理</p></div>
                     </a>
