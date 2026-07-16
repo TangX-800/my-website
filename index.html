@@ -382,6 +382,11 @@
             100% { opacity: 0; transform: scaleX(1); }
         }
 
+        @keyframes panel-enter {
+            from { opacity: 0; transform: translateY(2.5rem); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* 漫画分镜通用样式 */
         .panel-layout {
             position: relative;
@@ -438,7 +443,6 @@
 
         .manga-panel:hover .panel-image {
             filter: saturate(1) contrast(1.06);
-            transform: scale(1.035);
         }
 
         /* 带图分镜：减少大面积泛白，让画面与文字区更有层次 */
@@ -512,7 +516,7 @@
         }
 
         .manga-panel:hover .sungrow-image {
-            transform: translateY(36px) scale(1.035);
+            transform: translateY(36px);
         }
 
         .panel-copy {
@@ -850,16 +854,23 @@
             transform: translateY(2.5rem);
         }
 
-        .page.is-visible .hero-frame,
-        .page.is-visible .manga-panel {
+        .page.is-visible .hero-frame {
             opacity: 1;
             transform: translateY(0);
             transition: opacity 800ms var(--ease-out), transform 950ms var(--ease-out), filter 550ms var(--ease-out);
         }
 
-        .page.is-visible .manga-panel:nth-child(2) { transition-delay: 80ms; }
-        .page.is-visible .manga-panel:nth-child(3) { transition-delay: 140ms; }
-        .page.is-visible .manga-panel:nth-child(4) { transition-delay: 200ms; }
+        .page.is-visible .manga-panel {
+            opacity: 1;
+            transform: translateY(0);
+            transition: transform 950ms var(--ease-out), filter 550ms var(--ease-out);
+            animation: panel-enter 950ms var(--ease-out) backwards;
+            animation-delay: var(--panel-enter-delay, 0ms);
+        }
+
+        .page.is-visible .manga-panel:nth-child(2) { --panel-enter-delay: 80ms; }
+        .page.is-visible .manga-panel:nth-child(3) { --panel-enter-delay: 140ms; }
+        .page.is-visible .manga-panel:nth-child(4) { --panel-enter-delay: 200ms; }
 
         .page.is-visible .manga-panel:hover {
             transform: translate(-0.35rem, -0.35rem);
