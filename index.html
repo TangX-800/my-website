@@ -23,6 +23,8 @@
         }
 
         html {
+            height: 100%;
+            overflow: hidden;
             scroll-behavior: auto;
             scroll-snap-type: y mandatory;
             background: var(--black);
@@ -33,8 +35,9 @@
         }
 
         body {
+            height: 100%;
             min-width: 320px;
-            overflow-x: hidden;
+            overflow: hidden;
             background:
                 radial-gradient(circle, rgba(238, 234, 224, 0.08) 1px, transparent 1.3px) 0 0 / 9px 9px,
                 linear-gradient(115deg, transparent 0 62%, rgba(229, 58, 47, 0.045) 62% 63%, transparent 63% 100%),
@@ -54,56 +57,6 @@
             outline-offset: 5px;
         }
 
-        /* 固定导航 */
-        .site-nav {
-            position: fixed;
-            top: 50%;
-            left: clamp(0.55rem, 1.5vw, 1.4rem);
-            z-index: 30;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.7rem 0.4rem;
-            transform: translateY(-50%);
-        }
-
-        .nav-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
-            list-style: none;
-        }
-
-        .nav-list a {
-            display: grid;
-            place-items: center;
-            width: 2.3rem;
-            min-height: 2.3rem;
-            position: relative;
-            font-size: 0.74rem;
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            text-decoration: none;
-        }
-
-        .nav-list a::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: -0.48rem;
-            width: 3px;
-            height: 1.4rem;
-            background: var(--red);
-            transform: translateY(-50%) scaleY(0);
-            transition: transform 300ms var(--ease-out);
-        }
-
-        .nav-list a:hover::after,
-        .nav-list a.is-active::after {
-            transform: translateY(-50%) scaleY(1);
-        }
-
         /* 四个页面共用同一背景与版式 */
         .page {
             position: relative;
@@ -115,6 +68,10 @@
             scroll-snap-stop: always;
             isolation: isolate;
             overflow: hidden;
+        }
+
+        .page[hidden] {
+            display: none;
         }
 
         .page::before {
@@ -129,17 +86,6 @@
 
         .page:first-child::before {
             display: none;
-        }
-
-        .page::after {
-            content: attr(data-page);
-            position: absolute;
-            right: var(--page-x);
-            bottom: 1rem;
-            color: var(--gray);
-            font-family: Georgia, serif;
-            font-size: 0.62rem;
-            letter-spacing: 0.2em;
         }
 
         .closing-note {
@@ -338,25 +284,24 @@
             writing-mode: vertical-rl;
         }
 
-        .scroll-hint {
+        .hero-status {
             position: absolute;
-            bottom: 1rem;
+            bottom: 1.35rem;
             left: var(--page-x);
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            color: var(--gray);
-            font-size: 0.62rem;
-            letter-spacing: 0.18em;
+            gap: 0.7rem;
+            color: var(--red);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
         }
 
-        .scroll-hint::before {
+        .hero-status::before {
             content: "";
-            width: 3rem;
+            width: 2.5rem;
             height: 1px;
             background: var(--red);
-            transform-origin: left center;
-            animation: scroll-line 2.4s var(--ease-out) infinite;
         }
 
         @keyframes ring-breathe {
@@ -374,12 +319,6 @@
         @keyframes name-breathe {
             from { letter-spacing: -0.085em; }
             to { letter-spacing: -0.07em; }
-        }
-
-        @keyframes scroll-line {
-            0% { opacity: 0.35; transform: scaleX(0.25); }
-            55% { opacity: 1; transform: scaleX(1); }
-            100% { opacity: 0; transform: scaleX(1); }
         }
 
         @keyframes panel-enter {
@@ -887,21 +826,6 @@
 
         /* 手机布局 */
         @media (max-width: 700px) {
-            .site-nav {
-                left: 0.25rem;
-                padding: 0.65rem 0.35rem;
-            }
-
-            .nav-list {
-                gap: 0.45rem;
-            }
-
-            .nav-list a {
-                width: 2rem;
-                min-height: 2rem;
-                font-size: 0.64rem;
-            }
-
             .page {
                 padding-top: 4.2rem;
             }
@@ -1046,15 +970,6 @@
     </style>
 </head>
 <body>
-    <nav class="site-nav" aria-label="主导航">
-        <ul class="nav-list">
-            <li><a href="#home">首页</a></li>
-            <li><a href="#education">校园</a></li>
-            <li><a href="#experience">工作</a></li>
-            <li><a href="#other">其它</a></li>
-        </ul>
-    </nav>
-
     <main>
         <!-- 首页 -->
         <section class="page hero is-visible" id="home" data-page="00 / 03">
@@ -1065,11 +980,11 @@
                 <h1 class="hero-name" data-text="Tang">Tan<span>g</span></h1>
                 <p class="hero-subtitle">DESIGN · GAME · PRODUCT</p>
             </div>
-            <p class="scroll-hint">SCROLL TO BEGIN</p>
+            <p class="hero-status">个人主页更新中，暂时无法查看</p>
         </section>
 
         <!-- 校园经历：两个分镜模块 -->
-        <section class="page" id="education" data-page="01 / 03">
+        <section class="page" id="education" data-page="01 / 03" hidden>
             <div class="page-shell">
                 <header class="chapter-heading">
                     <h2><span class="chapter-number">01.</span>校园经历</h2>
@@ -1091,7 +1006,7 @@
         </section>
 
         <!-- 工作经历：四个不规则分镜模块 -->
-        <section class="page" id="experience" data-page="02 / 03">
+        <section class="page" id="experience" data-page="02 / 03" hidden>
             <div class="page-shell">
                 <header class="chapter-heading">
                     <h2><span class="chapter-number">02.</span>工作经历</h2>
@@ -1122,7 +1037,7 @@
         </section>
 
         <!-- 其它：两个分镜模块 -->
-        <section class="page" id="other" data-page="03 / 03">
+        <section class="page" id="other" data-page="03 / 03" hidden>
             <div class="page-shell">
                 <header class="chapter-heading">
                     <h2><span class="chapter-number">03.</span>其它</h2>
@@ -1168,16 +1083,13 @@
     </div>
 
     <script>
-        // 鼠标滚轮使用统一的逐帧缓动；触摸设备继续使用原生吸附。
-        const pages = [...document.querySelectorAll(".page")];
-        const navLinks = [...document.querySelectorAll('.nav-list a[href^="#"]')];
+        // 鼠标滚轮与触摸设备使用浏览器原生滚动，导航和方向键使用整页切换。
+        const pages = [...document.querySelectorAll(".page:not([hidden])")];
+        const navLinks = [...document.querySelectorAll('.nav-list li:not([hidden]) a[href^="#"]')];
         const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
         let currentPage = 0;
         let scrollFrame = 0;
         let isAnimating = false;
-        let wheelDistance = 0;
-        let wheelResetTimer = 0;
-        let wheelCooldownUntil = 0;
 
         // 两个个人项目共用验证层，并在当前标签页记录授权状态。
         const projectGate = document.querySelector("#project-gate");
@@ -1270,30 +1182,12 @@
                 }
 
                 isAnimating = false;
-                wheelDistance = 0;
-                wheelCooldownUntil = performance.now() + 320;
                 document.documentElement.classList.remove("is-page-scrolling");
                 history.replaceState(null, "", `#${pages[currentPage].id}`);
             }
 
             scrollFrame = requestAnimationFrame(animateScroll);
         }
-
-        window.addEventListener("wheel", (event) => {
-            if (reduceMotion.matches || event.ctrlKey) return;
-            event.preventDefault();
-            if (isAnimating || performance.now() < wheelCooldownUntil) return;
-
-            const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1);
-            wheelDistance += delta;
-            clearTimeout(wheelResetTimer);
-            wheelResetTimer = window.setTimeout(() => { wheelDistance = 0; }, 140);
-
-            if (Math.abs(wheelDistance) < 45) return;
-            const direction = wheelDistance > 0 ? 1 : -1;
-            wheelDistance = 0;
-            goToPage(getNearestPage() + direction);
-        }, { passive: false });
 
         window.addEventListener("keydown", (event) => {
             if (isAnimating) return;
