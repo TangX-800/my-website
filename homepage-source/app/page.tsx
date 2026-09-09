@@ -11,7 +11,7 @@ const cards = [
   ["aniimo", "伊莫", 1672, 941, "/cards/work-5.webp", false],
   ["energy-management", "家庭能源管理系统", 941, 1672, "/cards/work-6.webp", false],
   ["sungrow", "阳光家庭能源", 1536, 1024, "/cards/work-7.webp", false],
-  ["iflytek", "讯飞绘文", 1447, 1087, "/cards/work-8.webp?v=b7b38f8a", false],
+  ["iflytek", "讯飞绘文", 1447, 1087, "/cards/work-8.webp?v=5d0fb4c7", false],
 ] as const;
 
 const wrap = (value: number, length: number) =>
