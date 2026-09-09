@@ -415,6 +415,7 @@ export default function Home() {
           if (centered && settled) {
             // 每张卡片遵循同一规则：居中停稳后点击，打开自己的详情。
             setDetailIndex(picked.index);
+            if (detailRef.current) detailRef.current.dataset.touchOpened = String(event.pointerType === "touch");
             setDetailOpen(true);
           } else {
             target = current + distanceToCenter;
@@ -519,6 +520,8 @@ export default function Home() {
     <div className={`loading-screen${ready ? " is-hidden" : ""}`} aria-hidden="true"><i/><i/><i/></div>
     <dialog ref={detailRef} className="detail-overlay" aria-labelledby="detail-title"
       onKeyDown={(event) => {
+        // 使用键盘时恢复可见焦点，包括手机连接外接键盘的情况。
+        delete event.currentTarget.dataset.touchOpened;
         if (event.key === "Tab") {
           event.preventDefault();
           event.currentTarget.querySelector("button")?.focus();

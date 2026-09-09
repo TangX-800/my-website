@@ -132,6 +132,10 @@ button { font: inherit; }
 }
 .detail-hit-close:hover { background: #222; border-color: #999; }
 .detail-hit-close:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+/* 触屏打开详情时隐藏自动焦点外圈，保留按钮边框和键盘焦点。 */
+@media (hover: none) and (pointer: coarse) {
+  .detail-overlay[data-touch-opened="true"] .detail-hit-close:focus-visible { outline: none; }
+}
 
 @keyframes loader-bar { from { opacity: .22; transform: scaleX(.22); } to { opacity: 1; transform: scaleX(1); } }
 @keyframes detail-in { from { opacity: .35; transform: translate(-18%, 3%) scale(.42, .56); border-radius: 28px; } to { opacity: 1; transform: translate(0) scale(1); border-radius: 0; } }
